@@ -500,7 +500,7 @@
 <section class="cta-section" id="trial">
   <h2>Ready to book more meetings?</h2>
   <p>Start your free 14-day trial. No credit card, no commitment. Cancel any time.</p>
-  <form class="email-form" action="https://formspree.io/f/placeholder" method="POST" onsubmit="handleSubmit(event)">
+  <form class="email-form" action="#" onsubmit="handleSubmit(event)">
     <input type="email" name="email" placeholder="you@company.com" required />
     <button type="submit" class="btn btn-primary btn-lg">Get early access</button>
   </form>
@@ -522,8 +522,28 @@
 <script>
 function handleSubmit(e) {
   e.preventDefault();
-  const email = e.target.email.value;
-  window.location.href = `mailto:acustimet@gmail.com?subject=Closedate%20Early%20Access%3A%20${encodeURIComponent(email)}&body=Sign%20me%20up%20for%20early%20access%21%20Email%3A%20${encodeURIComponent(email)}`;
+  const form = e.target;
+  const email = form.email.value;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  // POST to Formspree — replace YOUR_FORM_ID below with the real Formspree endpoint
+  fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email })
+  })
+  .then(r => {
+    if (r.ok) {
+      form.innerHTML = '<p style="color:var(--brand);font-weight:600;font-size:1rem;">You\'re on the list! We\'ll be in touch within 24 hours.</p>';
+    } else {
+      // Fallback: open mailto
+      window.location.href = `mailto:acustimet@gmail.com?subject=Closedate%20Early%20Access&body=${encodeURIComponent(email)}`;
+    }
+  })
+  .catch(() => {
+    window.location.href = `mailto:acustimet@gmail.com?subject=Closedate%20Early%20Access&body=${encodeURIComponent(email)}`;
+  });
 }
 </script>
 
