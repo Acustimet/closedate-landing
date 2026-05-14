@@ -389,7 +389,7 @@
   </p>
   <div class="hero-ctas">
     <a href="#trial" class="btn btn-primary btn-lg">Start 14-day free trial</a>
-    <a href="mailto:acustimet@gmail.com?subject=Closedate%20Demo%20Request&body=Hi%2C%20I%27d%20like%20to%20see%20a%20demo%20of%20Closedate." class="btn btn-secondary btn-lg">Book a demo →</a>
+    <a href="book.html" class="btn btn-secondary btn-lg">Book a demo →</a>
   </div>
   <p class="hero-note">No credit card required · Free for 14 days · $15/mo after</p>
 </section>
@@ -505,7 +505,7 @@
     <button type="submit" class="btn btn-primary btn-lg">Get early access</button>
   </form>
   <p style="font-size:0.8rem; color:var(--muted);">
-    Or <a href="mailto:acustimet@gmail.com?subject=Closedate%20Demo%20Request&body=Hi%2C%20I%27d%20like%20to%20schedule%20a%20demo%20of%20Closedate." style="color:var(--brand);">email us to book a demo</a>
+    Or <a href="book.html" style="color:var(--brand);">book a demo here</a>
   </p>
 </section>
 
@@ -527,11 +527,11 @@ function handleSubmit(e) {
   const btn = form.querySelector('button');
   btn.textContent = 'Sending…';
   btn.disabled = true;
-  // POST to Formspree — replace YOUR_FORM_ID below with the real Formspree endpoint
-  fetch('https://formspree.io/f/YOUR_FORM_ID', {
+  // Formsubmit.co — no account needed; activates on first submission via email click
+  fetch('https://formsubmit.co/ajax/acustimet@gmail.com', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ email })
+    body: JSON.stringify({ email, _subject: 'Closedate Early Access Request', _captcha: 'false' })
   })
   .then(r => {
     if (r.ok) {

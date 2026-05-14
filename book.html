@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Demo — Closedate</title>
+  <meta name="description" content="Book a 30-minute Closedate demo. See how outbound sales teams use smart scheduling to book more meetings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #0F4C81;
+      --accent: #E85D26;
+      --accent-hover: #d14e1a;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #ffffff;
+      --bg-soft: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+
+    .page-wrap {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .page-wrap { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.25rem; }
+      .left-col { display: none; }
+    }
+
+    .left-col h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--brand);
+    }
+
+    .left-col p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .bullet-list .icon {
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .form-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .form-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-card .subtitle {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .field {
+      margin-bottom: 1.1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    label .req { color: var(--accent); }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text);
+      background: white;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand);
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-submit:disabled { background: var(--muted); cursor: not-allowed; transform: none; }
+
+    .fine-print {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    .success-state {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .success-state .check-circle {
+      width: 56px;
+      height: 56px;
+      background: #d1fae5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+    }
+
+    .success-state h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-state p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--brand); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">close<span>date</span></a>
+</nav>
+
+<div class="page-wrap">
+  <!-- Left: value prop -->
+  <div class="left-col">
+    <h1>See Closedate in&nbsp;30&nbsp;minutes</h1>
+    <p>Book a personal walkthrough with the founder. We'll show you how outbound teams use Closedate to book more meetings with less friction.</p>
+    <ul class="bullet-list">
+      <li>
+        <div class="icon">✓</div>
+        <span>Live product demo tailored to your team size and stack</span>
+      </li>
+      <li>
+        <div class="icon">✓</div>
+        <span>See round-robin setup, qualification questions, and CRM embeds in action</span>
+      </li>
+      <li>
+        <div class="icon">✓</div>
+        <span>Q&amp;A — ask anything</span>
+      </li>
+      <li>
+        <div class="icon">✓</div>
+        <span>No pressure. Honest conversation about whether it's a fit.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Right: form -->
+  <div class="form-card">
+    <h2>Request a demo</h2>
+    <p class="subtitle">We'll reach out within 24 hours to schedule a time that works for you.</p>
+
+    <form id="demoForm" onsubmit="handleDemoSubmit(event)">
+      <!-- Honeypot anti-spam -->
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+      <div class="field">
+        <label>Name <span class="req">*</span></label>
+        <input type="text" name="name" placeholder="Alex Johnson" required />
+      </div>
+
+      <div class="field">
+        <label>Work email <span class="req">*</span></label>
+        <input type="email" name="email" placeholder="alex@company.com" required />
+      </div>
+
+      <div class="field">
+        <label>Company <span class="req">*</span></label>
+        <input type="text" name="company" placeholder="Acme Corp" required />
+      </div>
+
+      <div class="field">
+        <label>SDR / sales team size</label>
+        <select name="team_size">
+          <option value="">Select…</option>
+          <option value="1-2">1–2 reps (just me or a small team)</option>
+          <option value="3-10">3–10 reps</option>
+          <option value="11-25">11–25 reps</option>
+          <option value="25+">25+ reps</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Current scheduling tool</label>
+        <select name="current_tool">
+          <option value="">Select…</option>
+          <option value="calendly">Calendly</option>
+          <option value="chili-piper">Chili Piper</option>
+          <option value="cal-com">Cal.com</option>
+          <option value="google-calendar">Google Calendar (manual)</option>
+          <option value="none">Nothing — email back-and-forth</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Anything specific you want to see?</label>
+        <textarea name="notes" placeholder="e.g. round-robin setup, HubSpot integration, qualification questions…"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Request demo →</button>
+      <p class="fine-print">No spam. We'll only reach out about your demo.</p>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Closedate &nbsp;·&nbsp; <a href="index.html">Back to home</a></p>
+</footer>
+
+<script>
+function handleDemoSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  const data = Object.fromEntries(new FormData(form));
+  data._subject = 'Closedate Demo Request: ' + (data.name || data.email);
+  data._captcha = 'false';
+
+  fetch('https://formsubmit.co/ajax/acustimet@gmail.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(r => {
+    if (r.ok) {
+      document.querySelector('.form-card').innerHTML = `
+        <div class="success-state">
+          <div class="check-circle">✓</div>
+          <h3>Demo request received!</h3>
+          <p>We'll reach out to <strong>${data.email}</strong> within 24 hours to schedule your walkthrough.</p>
+        </div>`;
+    } else {
+      fallbackMailto(data);
+    }
+  })
+  .catch(() => fallbackMailto(data));
+}
+
+function fallbackMailto(data) {
+  const body = `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\nTeam size: ${data.team_size || 'Not specified'}\nCurrent tool: ${data.current_tool || 'Not specified'}\nNotes: ${data.notes || 'None'}`;
+  window.location.href = `mailto:acustimet@gmail.com?subject=${encodeURIComponent('Closedate Demo Request: ' + data.name)}&body=${encodeURIComponent(body)}`;
+}
+</script>
+
+</body>
+</html>
