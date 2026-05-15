@@ -500,7 +500,10 @@
 <section class="cta-section" id="trial">
   <h2>Ready to book more meetings?</h2>
   <p>Start your free 14-day trial. No credit card, no commitment. Cancel any time.</p>
-  <form class="email-form" action="#" onsubmit="handleSubmit(event)">
+  <form class="email-form" action="https://formsubmit.co/acustimet@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Closedate Early Access Request" />
+    <input type="hidden" name="_next" value="https://acustimet.github.io/closedate-landing/?success=1" />
+    <input type="hidden" name="_captcha" value="false" />
     <input type="email" name="email" placeholder="you@company.com" required />
     <button type="submit" class="btn btn-primary btn-lg">Get early access</button>
   </form>
@@ -520,30 +523,9 @@
 </footer>
 
 <script>
-function handleSubmit(e) {
-  e.preventDefault();
-  const form = e.target;
-  const email = form.email.value;
-  const btn = form.querySelector('button');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-  // Formsubmit.co — no account needed; activates on first submission via email click
-  fetch('https://formsubmit.co/ajax/acustimet@gmail.com', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ email, _subject: 'Closedate Early Access Request', _captcha: 'false' })
-  })
-  .then(r => {
-    if (r.ok) {
-      form.innerHTML = '<p style="color:var(--brand);font-weight:600;font-size:1rem;">You\'re on the list! We\'ll be in touch within 24 hours.</p>';
-    } else {
-      // Fallback: open mailto
-      window.location.href = `mailto:acustimet@gmail.com?subject=Closedate%20Early%20Access&body=${encodeURIComponent(email)}`;
-    }
-  })
-  .catch(() => {
-    window.location.href = `mailto:acustimet@gmail.com?subject=Closedate%20Early%20Access&body=${encodeURIComponent(email)}`;
-  });
+if (new URLSearchParams(window.location.search).get('success') === '1') {
+  const form = document.querySelector('.email-form');
+  if (form) form.innerHTML = '<p style="color:var(--brand);font-weight:600;font-size:1rem;">You\'re on the list! We\'ll be in touch within 24 hours.</p>';
 }
 </script>
 
