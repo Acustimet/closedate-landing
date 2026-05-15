@@ -221,6 +221,21 @@
     }
 
     footer a { color: var(--brand); text-decoration: none; }
+
+    .btn-calendar {
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--brand);
+      color: white;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: inherit;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-calendar:hover { background: #0d4070; transform: translateY(-1px); }
   </style>
 </head>
 <body>
@@ -259,7 +274,12 @@
     <h2>Request a demo</h2>
     <p class="subtitle">We'll reach out within 24 hours to schedule a time that works for you.</p>
 
-    <form id="demoForm" onsubmit="handleDemoSubmit(event)">
+    <form id="demoForm" action="https://formsubmit.co/acustimet@gmail.com" method="POST">
+      <!-- Formsubmit.co config -->
+      <input type="hidden" name="_subject" value="Closedate Demo Request" />
+      <input type="hidden" name="_next" value="https://acustimet.github.io/closedate-landing/book.html?submitted=1" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
       <!-- Honeypot anti-spam -->
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
@@ -318,21 +338,18 @@
 </footer>
 
 <script>
-function handleDemoSubmit(e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target));
-  const subject = 'Closedate Demo Request: ' + (data.name || data.email);
-  const body = [
-    'Name: ' + data.name,
-    'Email: ' + data.email,
-    'Company: ' + data.company,
-    'Team size: ' + (data.team_size || 'Not specified'),
-    'Current tool: ' + (data.current_tool || 'Not specified'),
-    'Notes: ' + (data.notes || 'None')
-  ].join('\n');
-  window.location.href = 'mailto:acustimet@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  document.querySelector('.form-card').innerHTML = '<div class="success-state"><div class="check-circle">&#10003;</div><h3>Demo request received!</h3><p>Your email client will open with the details — just hit Send.</p></div>';
-}
+(function () {
+  if (new URLSearchParams(window.location.search).get('submitted') === '1') {
+    var gcalUrl = 'https://calendar.google.com/calendar/r/eventedit?text=30-min+Closedate+Demo&add=acustimet%40gmail.com';
+    document.getElementById('demoForm').closest('.form-card').innerHTML =
+      '<div class="success-state">' +
+        '<div class="check-circle">&#10003;</div>' +
+        '<h3>Request received!</h3>' +
+        '<p>We\'ll reach out within 24&nbsp;hours to confirm your slot.</p>' +
+        '<a href="' + gcalUrl + '" target="_blank" rel="noopener" class="btn-calendar">Propose a time on Google Calendar &rarr;</a>' +
+      '</div>';
+  }
+})();
 </script>
 
 </body>
